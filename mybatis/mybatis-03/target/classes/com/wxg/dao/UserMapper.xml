@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的mapper接口-->
+<mapper namespace="com.wxg.dao.UserMapper">
+
+    <!--select查询语句-->
+    <select id="getUserList" resultMap="UserMap">
+       select * from mybatis.user
+   </select>
+    <resultMap id="UserMap" type="User">
+        <result column="id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="pwd" property="password"></result>
+    </resultMap>
+
+
+    <select id="getUserById" resultType="User" parameterType="int">
+       select * from mybatis.user where id = #{id};
+   </select>
+
+
+    <select id="getUserByLimit" parameterType="map" resultMap="UserMap">
+        select * from user limit #{startIndex},#{pageSize}
+    </select>
+
+
+    <select id="getUserByRowBounds" resultMap="UserMap">
+        select * from user
+    </select>
+
+</mapper>
